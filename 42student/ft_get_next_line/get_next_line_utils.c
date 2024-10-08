@@ -6,7 +6,7 @@
 /*   By: fcoelho- <fcoelh-@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:48:07 by fcoelho-          #+#    #+#             */
-/*   Updated: 2024/10/07 17:09:53 by fcoelho-         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:16:56 by fcoelho-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char *ft_strchr(const char *str, int c) //why casting and am I moving the addres
     char *ptr;
 
     ptr = (char *)str;
-    while(str != 'c')
+    while(*str != c)
     {
-        if(str == '\0')
+        if(*str == '\0')
             return(NULL);
-        *str++;
+        str++;
     }
     return(ptr);
 }
@@ -29,9 +29,10 @@ char *ft_strchr(const char *str, int c) //why casting and am I moving the addres
 int ft_strlen(char *str)
 {
     int i;
-    while(str)
+    i = 0;
+    while(str && *str)
     {
-        *str++;
+        str++;
         i++;
     }
     return(i);
@@ -55,7 +56,7 @@ void    ft_bzero(void *s, size_t n)
     while(n--)
     {
         *str = '\0';
-        *s++;
+        s++;
     }
 }
 
@@ -66,14 +67,14 @@ char *ft_str_join(char *str1, char *str2)
     int total_len;
 
     total_len = ft_strlen(str1) + ft_strlen(str2); // why strlen2 if is an empty static variable   
-    str3 = malloc(total_len * sizeof(char) + 1);
+    str3 = ft_calloc(total_len, sizeof(char) + 1);
     if(!str3)
         return(NULL);
     str = str3;
-    while(str1)
+    while(str1 && *str1)
         *str3++ = *str1++;
-    while(str2)
-        *str3++ = *str2++; 
-    free(str1);
+    while(str2 && *str2)
+        *str3++ = *str2++;
+    //free(str3);
     return(str);
 }

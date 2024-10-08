@@ -6,7 +6,7 @@
 /*   By: fcoelho- <fcoelh-@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:48:34 by fcoelho-          #+#    #+#             */
-/*   Updated: 2024/10/07 17:34:00 by fcoelho-         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:18:19 by fcoelho-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char *ft_find_line(int fd, char *buffer)
 {
     char *temp;
-    size_t text_len;
+    int text_len;
 
     temp = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if(temp == NULL)
@@ -23,14 +23,14 @@ char *ft_find_line(int fd, char *buffer)
     text_len = 1;
     while (text_len > 0)
     {
-        text_len = read(fd, temp, BUFFER_SIZE);
+            text_len = read(fd, temp, BUFFER_SIZE);
         if (text_len == -1)
         {
             free(temp);
             return (NULL);
         }
         temp[text_len] = '\0';
-        temp = ft_str_join(temp, buffer);
+        temp = ft_str_join(buffer, temp);
         if (ft_strchr(temp, '\n'))
             break;
     }
@@ -40,6 +40,7 @@ char *ft_find_line(int fd, char *buffer)
 char *ft_get_line(char *text, char *buffer)
 {
     int 	i;
+    int     j;
     char 	*line;
 
     i = 0;
@@ -53,16 +54,16 @@ char *ft_get_line(char *text, char *buffer)
 		if (text[++i] == '\n')
 		{
 			line[i] = text[i];
-			line[++i] = '\0';
 			break;
 		}
     }
-	i = 0;
-	while(buffer[i] && buffer[i - 1] != '\n')
-		buffer[i++] = '\0';
-	buffer = buffer + i;
-	free(text);
-    return(line);
+    j =0;
+    while(text && text[++i])
+    {
+        buffer[j++] = text[i];
+        buffer[i]= 0;
+    }
+    return(free(text),line);
 }
 
 char *get_next_line(int fd)
@@ -70,7 +71,6 @@ char *get_next_line(int fd)
     static char buffer[BUFFER_SIZE + 1];
 	char *text;
     char *line;
-
 	text = NULL;
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
@@ -78,11 +78,17 @@ char *get_next_line(int fd)
 	if (!text)
 		return(NULL);
     line = ft_get_line(text, buffer);
+    // free(text);
     return (line);
 }
 
 int main(void)
 {
-	int fd = open("peco.txt", O_RDONLY);
+    char *dest;
+	int fd = open("file.txt", O_RDONLY);
 	printf("fd = %d\n", fd);
+    dest = get_next_line(fd);
+    printf("%s", dest);
+    free(dest);
+    close(fd);
 }

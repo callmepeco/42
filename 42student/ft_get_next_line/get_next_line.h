@@ -6,7 +6,7 @@
 /*   By: fcoelho- <fcoelh-@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:48:31 by fcoelho-          #+#    #+#             */
-/*   Updated: 2024/10/07 17:03:56 by fcoelho-         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:04:17 by fcoelho-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+char *get_next_line(int fd);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 int		ft_strlen(char *str);
