@@ -6,7 +6,7 @@
 /*   By: fcoelho- <fcoelh-@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:48:31 by fcoelho-          #+#    #+#             */
-/*   Updated: 2024/10/08 16:04:17 by fcoelho-         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:06:27 by fcoelho-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 
 # include <fcntl.h>
 # include <stdio.h>
-# include <unistd.h>
 # include <stdlib.h>
+# include <unistd.h>
 
-char *get_next_line(int fd);
+char	*get_next_line(int fd);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 int		ft_strlen(char *str);
 char	*ft_str_join(char *str1, char *str2);
-char *ft_strchr(const char *str, int c);
+char	*ft_strchr(const char *str, int c);
 
 #endif
